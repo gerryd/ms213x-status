@@ -21,10 +21,9 @@ var CLI struct {
 	Serial   string `optional help:"The USB Serial."`
 	RawPath  string `optional help:"The USB Device Path."`
 
-	ListDev ListHIDCmd `cmd help:"List devices."`
+	ListDev  ListHIDCmd `cmd help:"List devices."`
 
-	Read        MEMIOReadCmd      `cmd help:"Read and dump memory."`
-	Status      MEMIOStatusCmd    `cmd help:"Print status." default:1`
+	Status   StatusCmd `cmd help:"Print status." default:1`
 }
 
 func main() {
