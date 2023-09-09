@@ -1,4 +1,4 @@
-# ms2131x-status
+# ms213x-status
 
 This will get you the current status of an MS213X device in terms of input. It
 will tell you whether it is currently receiving anything at all, the received
