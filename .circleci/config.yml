@@ -1,0 +1,132 @@
+version: 2.1
+
+executors:
+  go:
+    docker:
+    - image: cimg/go:1.20
+  debian:
+    docker:
+    - image: debian:bookworm
+  ruby:
+    docker:
+    - image: cimg/ruby:3.2
+  github:
+    docker:
+    - image: cibuilds/github:0.13
+
+jobs:
+  test:
+    executor: go
+    steps:
+    - checkout
+    - run:
+        name: Update apt cache
+        command: sudo apt-get update
+    - run:
+        name: Install dependencies
+        command: sudo apt-get install libudev-dev
+    - restore_cache:
+        key: go-mod-{{ checksum "go.sum" }}
+    - run:
+        name: Download Go modules
+        command: go mod download
+    - save_cache:
+        key: go-mod-{{ checksum "go.sum" }}
+        paths:
+        - /home/circleci/go/pkg/mod
+    - run:
+        name: Run tests
+        command: gotestsum --junitfile junit.xml
+    - store_test_results:
+        path: junit.xml
+
+  build:
+    executor: debian
+    steps:
+    - checkout
+    - run: apt-get update
+    - run: apt-get install -y libudev-dev golang ca-certificates
+    - restore_cache:
+        key: go-mod-{{ checksum "go.sum" }}
+    - run: go mod download
+    - save_cache:
+        key: go-mod-{{ checksum "go.sum" }}
+        paths:
+        - /home/circleci/go/pkg/mod
+    - run: mkdir build
+    - run: go build -o build ./...
+    - persist_to_workspace:
+        root: .
+        paths:
+        - build
+    - store_artifacts:
+        path: build
+
+  package:
+    executor: ruby
+
+    steps:
+    - run: gem install fpm
+    - checkout
+    - attach_workspace:
+        at: .
+    - run: gem install package_cloud
+    - run: mkdir -v -p release
+    - run: >
+        fpm -n ms213x-status -s dir -t deb -a amd64 -v ${CIRCLE_TAG#v} -p release \
+           build/ms213x-status=/usr/bin/ \
+           README.md=/usr/share/doc/ms213x-status/
+    - run: package_cloud push fosdem/video-team/debian/bookworm release/*deb
+    - store_artifacts:
+        path: release
+    - persist_to_workspace:
+        root: .
+        paths:
+        - release
+
+  release:
+    executor: github
+
+    steps:
+    - run: apk add fakeroot
+    - attach_workspace:
+        at: .
+    - run: mkdir -v -p release
+    - run: fakeroot tar -czvf release/ms213x-status-${CIRCLE_TAG}.amd64.tar.gz -C build ms213x-status
+    - run: cd release && sha256sum ms213x-status-*.tar.gz *deb > sha256sums.txt
+    - run: > 
+        ghr \
+          -u "${CIRCLE_PROJECT_USERNAME}" \
+          -r "${CIRCLE_PROJECT_REPONAME}" \
+          -c "${CIRCLE_SHA1}" \
+          -delete \
+          "${CIRCLE_TAG}" \
+          ./release/
+
+workflows:
+  build-and-test:
+    jobs:
+    - test:
+        filters:
+          tags:
+            only: /.*/
+    - build:
+        requires:
+        - test
+        filters:
+          tags:
+            only: /.*/
+    - package:
+        requires:
+        - build
+        filters:
+          tags:
+            only: /.*/
+    - release:
+        requires:
+        - build
+        - package
+        filters:
+          tags:
+            only: /.*/
+  version: 2

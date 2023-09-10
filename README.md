@@ -1,5 +1,7 @@
 # ms213x-status
 
+[![CircleCI](https://circleci.com/gh/FOSDEM/video-ms213x-status.svg?style=svg)](https://circleci.com/gh/FOSDEM/video-ms213x-status)
+
 This will get you the current status of an MS213X device in terms of input. It
 will tell you whether it is currently receiving anything at all, the received
 resolution and framerate.
