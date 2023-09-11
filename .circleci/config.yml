@@ -64,7 +64,6 @@ jobs:
 
   package:
     executor: ruby
-
     steps:
     - run: gem install fpm
     - checkout
@@ -86,7 +85,6 @@ jobs:
 
   release:
     executor: github
-
     steps:
     - run: apk add fakeroot
     - attach_workspace:
@@ -122,6 +120,8 @@ workflows:
         filters:
           tags:
             only: /.*/
+          branches:
+            ignore: /.*/
     - release:
         requires:
         - build
@@ -129,4 +129,6 @@ workflows:
         filters:
           tags:
             only: /.*/
+          branches:
+            ignore: /.*/
   version: 2
