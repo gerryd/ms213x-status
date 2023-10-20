@@ -5,7 +5,6 @@ import (
 	"os"
 	"time"
 
-	"encoding/binary"
 	"encoding/json"
 
 	"github.com/google/renameio"
@@ -34,17 +33,16 @@ func (s *StatusCmd) Run(c *Context) error {
 	for next {
 		output := &outputData{}
 
-		buf := readmem(c, Region { Region: "RAM", Addr: 0x0000e184 }, 2)
-		output.Width = int(binary.LittleEndian.Uint16(buf))
-
-		buf = readmem(c, Region { Region: "RAM", Addr: 0x0000e18c }, 2)
-		output.Height = int(binary.LittleEndian.Uint16(buf))
-
-		buf = readmem(c, Region { Region: "RAM", Addr: 0x0000e180 }, 1)
+		buf := readmem(c, Region { Region: "RAM", Addr: 0x0000e180 }, 16)
 
 		if (len(buf) == 0) {
+			continue
+		}
 
-		} else if (buf[0] > 0) {
+		output.Width = (int(buf[5]) * 256) + int(buf[4])
+		output.Height = (int(buf[13]) * 256) + int(buf[12])
+
+		if (int(buf[0:1][0]) > 0) {
 			output.Signal = "yes"
 		} else {
 			output.Signal = "no"
