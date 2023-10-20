@@ -1,5 +1,7 @@
 github.com/BertoldVdb/ms-tools v0.0.0-20221129120332-dd3c7641485a h1:HiNl4aayDj6YwzDHtbcRBX79r8BzCY6gBmGkalPkVuQ=
 github.com/BertoldVdb/ms-tools v0.0.0-20221129120332-dd3c7641485a/go.mod h1:jmbR3cRIFTGz2Licvnbx5fv/SG6aLRJHpOILmEKTy5M=
+github.com/BertoldVdb/ms-tools v0.0.0-20231004114646-22ddf782f595 h1:dUuC+xTDdNG2kl6WF0O4iJKAzabaKhNfedXrdaz6pQs=
+github.com/BertoldVdb/ms-tools v0.0.0-20231004114646-22ddf782f595/go.mod h1:jmbR3cRIFTGz2Licvnbx5fv/SG6aLRJHpOILmEKTy5M=
 github.com/alecthomas/assert/v2 v2.1.0 h1:tbredtNcQnoSd3QBhQWI7QZ3XHOVkw1Moklp2ojoH/0=
 github.com/alecthomas/kong v0.2.17/go.mod h1:ka3VZ8GZNPXv9Ov+j4YNLkI8mTuhXyr/0ktSlqIydQQ=
 github.com/alecthomas/kong v0.8.0 h1:ryDCzutfIqJPnNn0omnrgHLbAggDQM2VWHikE1xqK7s=
@@ -8,6 +10,8 @@ github.com/alecthomas/repr v0.1.0 h1:ENn2e1+J3k09gyj2shc0dHr/yjaWSHRlrJ4DPMevDqE
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/fatih/color v1.12.0/go.mod h1:ELkj/draVOlAH/xkhN6mQ50Qd0MPOk5AAr3maGEBuJM=
+github.com/google/renameio v1.0.1 h1:Lh/jXZmvZxb0BBeSY5VKEfidcbcbenKjZFzM/q0fSeU=
+github.com/google/renameio v1.0.1/go.mod h1:t/HQoYBZSsWSNK35C6CO/TpPLDVWvxOHboWUAweKUpk=
 github.com/hexops/gotextdiff v1.0.3 h1:gitA9+qJrrTCsiCl7+kh75nPqQt1cx4ZkudSTLoUqJM=
 github.com/inancgumus/screen v0.0.0-20190314163918-06e984b86ed3/go.mod h1:Ey4uAp+LvIl+s5jRbOHLcZpUDnkjLBROl15fZLwPlTM=
 github.com/mattn/go-colorable v0.1.8/go.mod h1:u6P/XSegPjTcexA+o6vUJrdnUu04hMope9wVRipJSqc=
