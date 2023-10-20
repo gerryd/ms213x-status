@@ -32,7 +32,7 @@ func (s *StatusCmd) Run(c *Context) error {
 
 	buf = readmem(c, Region { Region: "RAM", Addr: 0x0000e180 }, 1)
 
-	if (buf[0] > 0) {
+	if (len(buf) > 0 && buf[0] > 0) {
 		output.Signal = "yes"
 	} else {
 		output.Signal = "no"

@@ -32,13 +32,13 @@ func main() {
 		kong.NamedMapper("hex", intMapper{base: 16}))
 	if err != nil {
 		fmt.Println(err)
-		return
+		os.Exit(1)
 	}
 
 	ctx, err := k.Parse(os.Args[1:])
 	if err != nil {
 		fmt.Println(err)
-		return
+		os.Exit(1)
 	}
 
 	c := &Context{}
@@ -46,7 +46,7 @@ func main() {
 		dev, err := OpenDevice()
 		if err != nil {
 			fmt.Println("Failed to open device", err)
-			return
+			os.Exit(1)
 		}
 		defer dev.Close()
 
@@ -64,7 +64,7 @@ func main() {
 		c.hal, err = mshal.New(dev, config)
 		if err != nil {
 			fmt.Println("Failed to create HAL", err)
-			return
+			os.Exit(1)
 		}
 	}
 
