@@ -2,9 +2,13 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"time"
+
 	"encoding/binary"
 	"encoding/json"
+
+	"github.com/google/renameio"
 )
 
 type Region struct {
@@ -56,7 +60,11 @@ func (s *StatusCmd) Run(c *Context) error {
 			p = fmt.Sprintf("width: %d\nheight: %d\nsignal: %s\n", output.Width, output.Height, output.Signal)
 		}
 
-		fmt.Print(p)
+		if (s.Filename == "") {
+			fmt.Print(p)
+		} else {
+			renameio.WriteFile(s.Filename, []byte(p), os.FileMode(int(0644)))
+		}
 
 		if (s.Loop == 0) {
 			next = false

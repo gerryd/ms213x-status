@@ -1,5 +1,3 @@
-github.com/BertoldVdb/ms-tools v0.0.0-20221129120332-dd3c7641485a h1:HiNl4aayDj6YwzDHtbcRBX79r8BzCY6gBmGkalPkVuQ=
-github.com/BertoldVdb/ms-tools v0.0.0-20221129120332-dd3c7641485a/go.mod h1:jmbR3cRIFTGz2Licvnbx5fv/SG6aLRJHpOILmEKTy5M=
 github.com/BertoldVdb/ms-tools v0.0.0-20231004114646-22ddf782f595 h1:dUuC+xTDdNG2kl6WF0O4iJKAzabaKhNfedXrdaz6pQs=
 github.com/BertoldVdb/ms-tools v0.0.0-20231004114646-22ddf782f595/go.mod h1:jmbR3cRIFTGz2Licvnbx5fv/SG6aLRJHpOILmEKTy5M=
 github.com/alecthomas/assert/v2 v2.1.0 h1:tbredtNcQnoSd3QBhQWI7QZ3XHOVkw1Moklp2ojoH/0=
