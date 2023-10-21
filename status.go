@@ -25,6 +25,7 @@ type outputData struct {
 	Width  int    `json:"width"`
 	Height int    `json:"height"`
 	Signal string `json:"signal"`
+	Time   int64  `json:"time"`
 }
 
 func (s *StatusCmd) Run(c *Context) error {
@@ -32,6 +33,7 @@ func (s *StatusCmd) Run(c *Context) error {
 
 	for next {
 		output := &outputData{}
+		output.Time = time.Now().UnixMilli()
 
 		buf := readmem(c, Region { Region: "RAM", Addr: 0x0000e180 }, 16)
 
@@ -73,9 +75,8 @@ func (s *StatusCmd) Run(c *Context) error {
 		if (s.Json) {
 			data, _ := json.Marshal(output)
 			p = string(data)
-
 		} else {
-			p = fmt.Sprintf("width: %d\nheight: %d\nsignal: %s\n", output.Width, output.Height, output.Signal)
+			p = fmt.Sprintf("time: %d\nwidth: %d\nheight: %d\nsignal: %s\n", output.Time, output.Width, output.Height, output.Signal)
 		}
 
 		if (s.Filename == "") {
