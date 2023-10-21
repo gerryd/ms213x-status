@@ -64,7 +64,7 @@ func (s *StatusCmd) Run(c *Context) error {
 			}
 		}
 
-		if (buf[0] > 0) {
+		if (buf[0] == 0) {
 			output.Signal = "yes"
 		} else {
 			output.Signal = "no"
