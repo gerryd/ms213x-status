@@ -35,7 +35,7 @@ func (s *StatusCmd) Run(c *Context) error {
 		output := &outputData{}
 		output.Time = time.Now().UnixMilli()
 
-		buf := readmem(c, Region { Region: "RAM", Addr: 0x0000e180 }, 16)
+		buf := readmem(c, Region { Region: "RAM", Addr: 0x000f660 }, 4)
 
 		if (len(buf) == 0) {
 			// failed read in a loop should just continue and hope...
@@ -48,23 +48,23 @@ func (s *StatusCmd) Run(c *Context) error {
 			}
 		}
 
-		// signal is weird and seems to be different depending on (non-)interlaced input
-		// observed:
-		// - no signal: 0x00
-		// - no signal after non-interlaced: 0x08
-		// - non-interlaced signal: 0x07
-		// - interlaced signal: 0x0f
-		signal := int(buf[0:1][0])
+		output.Width = int(buf[1])*256+int(buf[0])
+		output.Height = int(buf[3])*256+int(buf[2])
 
-		output.Width = (int(buf[5]) * 256) + int(buf[4])
-		output.Height = (int(buf[13]) * 256) + int(buf[12])
+		buf = readmem(c, Region { Region: "RAM", Addr: 0x0000f6e9 }, 1)
 
-		// looks like 0x0f/15 means we have an interlaced signal, so we read half the height
-		if (signal == 15) {
-			output.Height = 2 * output.Height
+		if (len(buf) == 0) {
+			// failed read in a loop should just continue and hope...
+			if (s.Loop == 0) {
+				fmt.Println("Read nothing from RAM, exiting")
+				os.Exit(1)
+			} else {
+				time.Sleep(time.Duration(s.Loop) * time.Millisecond)
+				continue
+			}
 		}
 
-		if (signal > 0 && signal != 8) {
+		if (buf[0] > 0) {
 			output.Signal = "yes"
 		} else {
 			output.Signal = "no"
