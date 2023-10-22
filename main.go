@@ -24,6 +24,8 @@ var CLI struct {
 	ListDev  ListHIDCmd `cmd help:"List devices."`
 
 	Status   StatusCmd `cmd help:"Print status." default:1`
+
+	Firmware FirmwareCmd `cmd help:"Do firmware things."`
 }
 
 func main() {
@@ -42,7 +44,7 @@ func main() {
 	}
 
 	c := &Context{}
-	if ctx.Command() != "list-dev" {
+	if ctx.Command() != "list-dev" && ctx.Command() != "firmware" {
 		dev, err := OpenDevice()
 		if err != nil {
 			fmt.Println("Failed to open device", err)
