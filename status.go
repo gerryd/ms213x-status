@@ -29,6 +29,8 @@ type OutputData struct {
 	Time   int64  `json:"time"`
 }
 
+// the murderous (thanks, Vasil) is always correct, but will every so often kill
+// the device during a read
 func readMurderous(c *Context, output *OutputData) bool {
 	buf := readmem(c, Region { Region: "RAM", Addr: 0x0000e180 }, 16)
 
@@ -61,8 +63,9 @@ func readMurderous(c *Context, output *OutputData) bool {
 	return true
 }
 
+// the flaky region is always safe to read, but not always correct
 func readFlaky(c *Context, output *OutputData) bool {
-	buf := readmem(c, Region { Region: "RAM", Addr: 0x000f660 }, 4)
+	buf := readmem(c, Region { Region: "RAM", Addr: 0x0000f660 }, 4)
 
 	if (len(buf) == 0) {
 		return false
@@ -86,7 +89,32 @@ func readFlaky(c *Context, output *OutputData) bool {
 	return true
 }
 
+// seemingly similar to the flaky region, slight differences though; but not
+// nore correct
 func readUnknown(c *Context, output *OutputData) bool {
+	buf := readmem(c, Region { Region: "RAM", Addr: 0x0000f606 }, 8)
+
+	if (len(buf) == 0) {
+		return false
+	}
+
+	output.Width = int(buf[1])*256+int(buf[0])
+	output.Height = int(buf[7])*256+int(buf[6])
+
+	// signal is the same as flaky for now
+	buf = readmem(c, Region { Region: "RAM", Addr: 0x0000f6e9 }, 1)
+
+	if (len(buf) == 0) {
+		return false
+	}
+
+	if (buf[0] == 0) {
+		output.Signal = "yes"
+	} else {
+		output.Signal = "no"
+	}
+
+
 	return true
 }
 
