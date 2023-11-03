@@ -19,7 +19,7 @@ type StatusCmd struct {
 	Json      bool   `optional name:"json" help:"Output JSON instead of the default list."`
 	Loop      int    `optional name:"loop" help:"Run in a loop and sleep every N microseconds"`
 	Filename  string `optional name:"filename" help:"Output to a file instead of stdout"`
-	Region    string `optional name:"region" help:"Region to read (murderous [default], flaky, unknown)"`
+	Region    string `optional name:"region" help:"Region to read (murderous, flaky [default], unknown)"`
 }
 
 type OutputData struct {
@@ -116,7 +116,7 @@ func (s *StatusCmd) Run(c *Context) error {
 			case "fazant":
 				read = readFazant(c, output)
 			default:
-				read = readMurderous(c, output)
+				read = readFlaky(c, output)
 		}
 
 		if (!read) {
