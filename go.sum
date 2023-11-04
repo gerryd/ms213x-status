@@ -1,5 +1,9 @@
 github.com/BertoldVdb/ms-tools v0.0.0-20231004114646-22ddf782f595 h1:dUuC+xTDdNG2kl6WF0O4iJKAzabaKhNfedXrdaz6pQs=
 github.com/BertoldVdb/ms-tools v0.0.0-20231004114646-22ddf782f595/go.mod h1:jmbR3cRIFTGz2Licvnbx5fv/SG6aLRJHpOILmEKTy5M=
+github.com/BertoldVdb/ms-tools v0.2.0 h1:uhs8SBnAx1/vlZCN30xk5HwNhOWvjeh56kwUGOCyNl8=
+github.com/BertoldVdb/ms-tools v0.2.0/go.mod h1:4+UR0RlTL4jv4aDXE2SQHdYjbDBiBp1XfvCl8D1qSv8=
+github.com/BertoldVdb/ms-tools v0.3.0 h1:1Xd/HUdgTwlq+C5tsYRX+RqofcuqKpQn/e3JPcDV/tg=
+github.com/BertoldVdb/ms-tools v0.3.0/go.mod h1:4+UR0RlTL4jv4aDXE2SQHdYjbDBiBp1XfvCl8D1qSv8=
 github.com/alecthomas/assert/v2 v2.1.0 h1:tbredtNcQnoSd3QBhQWI7QZ3XHOVkw1Moklp2ojoH/0=
 github.com/alecthomas/kong v0.2.17/go.mod h1:ka3VZ8GZNPXv9Ov+j4YNLkI8mTuhXyr/0ktSlqIydQQ=
 github.com/alecthomas/kong v0.8.0 h1:ryDCzutfIqJPnNn0omnrgHLbAggDQM2VWHikE1xqK7s=
@@ -16,6 +20,7 @@ github.com/mattn/go-colorable v0.1.8/go.mod h1:u6P/XSegPjTcexA+o6vUJrdnUu04hMope
 github.com/mattn/go-isatty v0.0.12/go.mod h1:cbi8OIDigv2wuxKPP5vlRcQ1OAZbq2CE4Kysco4FUpU=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/sigurn/crc16 v0.0.0-20211026045750-20ab5afb07e3/go.mod h1:9/etS5gpQq9BJsJMWg1wpLbfuSnkm8dPF6FdW2JXVhA=
 github.com/sstallion/go-hid v0.0.0-20190621001400-1cf4630be9f4/go.mod h1:JwBz6izP5UGcbYDU5VGeLkqpRIpSBDPtCB5/XnVXz9Q=
 github.com/sstallion/go-hid v0.14.1 h1:shbZlKqv5fr1KnxwqtLEPGkOoA6OSUWTx9TblegATvc=
 github.com/sstallion/go-hid v0.14.1/go.mod h1:fPKp4rqx0xuoTV94gwKojsPG++KNKhxuU88goGuGM7I=
